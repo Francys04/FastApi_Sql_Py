@@ -1,16 +1,22 @@
+""" The List type hint is used to indicate that a variable or 
+function parameter is expected to be a list containing elements of a specific type."""
 from typing import List
+"""create RESTful APIs with automatic validation, serialization, and documentation"""
 import fastapi as _fastapi
 # # import for bridge between relationship api and user
 import sqlalchemy.orm as _orm
 import services as _services, schemas as _schemas
 
+""" Is an instance of the FastAPI class from FastAPI. 
+It is the central application instance that handles routing and serves as the core of your API."""
 app = _fastapi.FastAPI()
 
+"""function is called to create the database tables based on the SQLAlchemy models you have defined"""
 _services.create_database()
 
 
-# # create commands api for create a user, create get data from db with Session method
-# if put same gmail for user input data, will have message "400"
+"""create commands api for create a user, create get data from db with Session method
+# if put same gmail for user input data, will have message "400"""
 @app.post("/users/", response_model=_schemas.User)
 def create_user(
     user: _schemas.UserCreate, db: _orm.Session = _fastapi.Depends(_services.get_db)
@@ -81,8 +87,6 @@ def read_post(post_id: int, db: _orm.Session = _fastapi.Depends(_services.get_db
         )
 
     return post
-
-
 
 # delete id post
 @app.delete("/posts/{post_id}")

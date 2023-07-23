@@ -1,14 +1,14 @@
-# Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
+"""Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL."""
 import sqlalchemy as _sql
-# "bridge" between object-oriented programs and, in most cases, relational databases
+""" "bridge" between object-oriented programs and, in most cases, relational databases"""
 import sqlalchemy.orm as _orm 
 
 import database as _database
-
+"""The datetime module provides classes for manipulating dates and times in both simple and complex ways."""
 import datetime as _dt
 
 
-# table for user data
+"""table for user data"""
 class User(_database.Base):
     __tablename__ = "users"
     id = _sql.Column(_sql.Integer, primary_key=True)
@@ -19,7 +19,7 @@ class User(_database.Base):
     
     posts = _orm.relationship("Post", back_populates="owner")
     
-# table for post data
+"""table for post data"""
 class Post(_database.Base):
     __tablename__ = "posts"
     id = _sql.Column(_sql.Integer, primary_key=True, index=True)
